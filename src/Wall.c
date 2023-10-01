@@ -114,6 +114,7 @@ void renderWalls(Raster* screen, const Map* map, const Camera* camera,
             uint8_t* tilePixels = tileRaster->pixels;
             int w = tileRaster->width;
             int h = tileRaster->height;
+            int wh = w * h;
             
             double wallHeight = 1.0 / (p * result.z) * width2;
             double wallHeight2 = wallHeight / 2.0;
@@ -134,7 +135,7 @@ void renderWalls(Raster* screen, const Map* map, const Camera* camera,
                 int py = (int) (v * h);
                 int idx = px + py * w;
                 
-                if (idx >= 0 && idx < w * h) {
+                if (idx >= 0 && idx < wh) {
                     idx *= 3;
                     pixels[index + 0] = (uint8_t) (fogT * tilePixels[idx + 0]);
                     pixels[index + 1] = (uint8_t) (fogT * tilePixels[idx + 1]);

@@ -82,12 +82,13 @@ void renderFloors(Raster* screen, const Map* map, const Camera* camera,
                     uint8_t* tilePixels = tileRaster->pixels;
                     int w = tileRaster->width;
                     int h = tileRaster->height;
+                    int wh = w * h;
                     double u = uv.x - tileX;
                     double v = uv.y - tileY;
                     int px = (int) (u * w);
                     int py = (int) (v * h);
                     int idx = px + py * w;
-                    if (idx >= 0 && idx < w * h) {
+                    if (idx >= 0 && idx < wh) {
                         idx *= 3;
                         r = (uint8_t) (fogT * tilePixels[idx + 0]);
                         g = (uint8_t) (fogT * tilePixels[idx + 1]);
