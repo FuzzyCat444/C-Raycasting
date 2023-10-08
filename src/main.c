@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     
     App* app = App_Create(appWidth, appHeight, loadBitmap);
     SDL_Surface* screenSurface = SDL_CreateRGBSurfaceWithFormat(
-        0, appWidth, appHeight, 32, SDL_PIXELFORMAT_BGR888
+        0, appWidth, appHeight, 32, SDL_PIXELFORMAT_RGB24
     );
     
     int running = 1;
@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
                     for (int i = 0; i < 3; i++)
                         screenPixels[screenI_ + i] = appPixels[appI + i];
                     appI += 3;
-                    screenI_ += 4;
+                    screenI_ += 3;
                 }
                 screenI += pitch;
             }
@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
 
 Raster* loadBitmap(const char* file) {
     SDL_Surface* loaded = SDL_LoadBMP(file);
-    SDL_PixelFormat* format = SDL_AllocFormat(SDL_PIXELFORMAT_BGR888);
+    SDL_PixelFormat* format = SDL_AllocFormat(SDL_PIXELFORMAT_RGB24);
     SDL_Surface* converted = SDL_ConvertSurface(
         loaded, format, 0
     );
@@ -152,7 +152,7 @@ Raster* loadBitmap(const char* file) {
             rasterPixels[pi + 1] = cpixels[ci_ + 1];
             rasterPixels[pi + 2] = cpixels[ci_ + 2];
             pi += 3;
-            ci_ += 4;
+            ci_ += 3;
         }
         ci += pitch;
     }
